@@ -2,6 +2,7 @@ import mongoose, {Schema} from "mongoose";
 
 export const ProductSschema = new Schema({
     name_product:{type: String, require: true},
+    description_product:{type: String, require: true},
     category:{type: String, require: true},
     price:{type: Number, require: true},
     stock:{type: Number, require: true},

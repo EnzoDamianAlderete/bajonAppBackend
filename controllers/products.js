@@ -10,10 +10,11 @@ export const getAllProducts = async(req,res)=>{
 }
 export const createProduct = async (req,res)=>{
     try {
-        const {name_product,category, price,stock} = req.body;
+        const {name_product,description_product,category, price,stock} = req.body;
 
         const newProduct = new Product({
             name_product,
+            description_product,
             category, 
             price, 
             stock,
