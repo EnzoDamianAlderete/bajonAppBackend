@@ -8,6 +8,18 @@ export const getAllProducts = async(req,res)=>{
         res.status(500).json({error});
     }
 }
+
+export const getProduct = async(req,res)=>{
+    try {
+        const product = await Product.find();
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({error});
+    }
+}
+
+
+
 export const createProduct = async (req,res)=>{
     try {
         const {name_product,description_product,category, price,stock} = req.body;
