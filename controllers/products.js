@@ -11,8 +11,10 @@ export const getAllProducts = async(req,res)=>{
 export const createProduct = async (req,res)=>{
     try {
         const {name_product,description_product,category, price,stock} = req.body;
+        const id = (Math.random()*10);
 
         const newProduct = new Product({
+            id,
             name_product,
             description_product,
             category, 
