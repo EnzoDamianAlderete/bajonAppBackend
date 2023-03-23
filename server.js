@@ -7,6 +7,7 @@ import config from "./config.js";
 import cors from "cors";
 import path from 'path';
 import { fileURLToPath } from 'url';
+import AdminRouter from './routes/admin.routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -24,6 +25,7 @@ app.use('/public', express.static(`${__dirname}/storage/imgs`));
 
 //Routes
 app.use(UserRouter);
+app.use(AdminRouter);
 app.use(ProductRouter);
 app.use(OrderRouter);
 

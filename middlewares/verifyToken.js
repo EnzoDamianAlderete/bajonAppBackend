@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export const verifyToken=async(req,res,next)=>{
+const verifyToken=async(req,res,next)=>{
     const token = req.headers["token"];
 
     if(token){
@@ -15,3 +15,5 @@ export const verifyToken=async(req,res,next)=>{
         res.status(400).json({ mensaje: "Debes enviar un token"});
     }
 };
+
+export default verifyToken;
