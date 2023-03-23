@@ -13,7 +13,11 @@ import jwt from 'jsonwebtoken';
 export const getUser = async(req,res)=>{
 
     try {
-        const user = await User.find({ _id: req.params.id }).populate('orders');
+        const user = await User.find({ _id: req.params.id }).populate('orders',{
+            _id: 1,
+            name_user: 1,
+            price: 1,
+        });
         res.status(200).json(user);
     } catch (error) {
         res.status(500).json(error);

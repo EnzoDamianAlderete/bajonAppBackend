@@ -7,8 +7,13 @@ export const ProductSschema = new Schema({
     category:{type: String, require: true},
     price:{type: Number, require: true},
     stock:{type: Number, require: true},
-    deleted:{type: Boolean, require: true, default: false},
+    available:{type: Boolean, require: true, default: true},
+    imgUrl:{type: String},
 });
+
+ProductSschema.methods.setImageUrl = function setImageUrl(filename){
+    this.imgUrl = `http://localhost:3100/public/${filename}`
+}
 
 const Product = mongoose.model("Product",ProductSschema);
 export default Product;

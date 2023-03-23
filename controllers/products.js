@@ -23,6 +23,7 @@ export const getProduct = async(req,res)=>{
 export const createProduct = async (req,res)=>{
     try {
         const {name_product,description_product,category, price,stock} = req.body;
+
         const id = (Math.random()*10);
 
         const newProduct = new Product({
@@ -33,6 +34,11 @@ export const createProduct = async (req,res)=>{
             price, 
             stock,
         });
+
+        if(req.file){
+            const { filename } = req.file;
+            newProduct.setImageUrl(filename);
+        }
 
         newProduct.save().then((product)=>{
             res.json({ mensaje: "Producto agregado correctamente", product})
