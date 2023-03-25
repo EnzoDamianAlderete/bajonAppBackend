@@ -1,6 +1,9 @@
 import User from "../schemas/user.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import config from "../config.js";
+
+const SECRET_WORD = config.SECRET_WORD;
 
  export const getAllUsers = async(req,res)=>{
     try {
@@ -11,17 +14,18 @@ import jwt from 'jsonwebtoken';
     }
 }
 export const getUser = async(req,res)=>{
-
-    try {
-        const user = await User.find({ _id: req.params.id }).populate('orders',{
-            _id: 1,
-            name_user: 1,
-            price: 1,
-        });
-        res.status(200).json(user);
-    } catch (error) {
-        res.status(500).json(error);
-    }
+    const {id} = req.user;
+    
+    User.findById(id).then((user)=>{
+        if(!user){
+            return res.json({
+                mensaje:"No se encontro ningun usuario"
+            });
+        }else {
+            const {_id, password, __v, ...resto } = user._doc;
+            res.json(resto);
+        }
+    });
 }
 
  export const createUser = async(req,res)=>{
@@ -69,7 +73,7 @@ export const login = async(req,res)=>{
                     name
                 };
 
-                const token = jwt.sign(data, "secreto",{ expiresIn:864000,});
+                const token = jwt.sign(data, SECRET_WORD ,{ expiresIn:864000,});
 
                 res.json({
                     mensaje:"Sesion iniciada exitosamente",
