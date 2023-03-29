@@ -11,29 +11,33 @@ import Admin from '../schemas/admins.js';
     }
 }
 export const getAdmin = async(req,res)=>{
-
-    try {
-        const admin = await Admin.find({ _id: req.params.id })
-        res.status(200).json(admin);
-    } catch (error) {
-        res.status(500).json(error);
-    }
+    const {id} = req.user;
+    
+    Admin.findById(id).then((user)=>{
+        if(!user){
+            return res.json({
+                mensaje:"No se encontro ningun usuario"
+            });
+        }else {
+            const {_id, password, __v, ...resto } = user._doc;
+            res.json(resto);
+        }
+    });
 }
 
  export const createAdmin = async(req,res)=>{
-    const {name, email, password} = req.body;
+    const { email, password} = req.body;
 
     Admin.findOne({email}).then((admin)=>{
         if(admin){
             return res.json({mensaje:"Ya existe un usuario con este correo electronico"});
-        }else if(!name ||!email||!password){
+        }else if(!email||!password){
             return res.json({ mensaje:"Falta un campo por completar"});
         }else{
             bcrypt.hash(password,10,(error, passwordHased)=>{
                 if(error) res.json({error});
                 else{
                     const newAdmin = new Admin({
-                        name,
                         email,
                         password:passwordHased,
                     });
@@ -58,11 +62,11 @@ export const loginAdmin = async(req,res)=>{
 
         bcrypt.compare(password, admin.password).then((esCorrecta)=>{
             if(esCorrecta){
-                const {id , name } = admin;
+                const {id ,email } = admin;
 
                 const data = {
                     id,
-                    name
+                    email
                 };
 
                 const token = jwt.sign(data, "secreto",{ expiresIn:864000,});
@@ -71,7 +75,7 @@ export const loginAdmin = async(req,res)=>{
                     mensaje:"Sesion iniciada exitosamente",
                     admin:{
                         id,
-                        name,
+                        email,
                         token,
                     },
                 });

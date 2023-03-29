@@ -33,7 +33,7 @@ export const getUser = async(req,res)=>{
 
     User.findOne({email}).then((user)=>{
         if(user){
-            return res.json({mensaje:"Ya existe un usuario con este correo electronico"});
+            return res.status(500).json({mensaje:"Ya existe un usuario con este correo electronico"});
         }else if(!name ||!email||!password){
             return res.json({ mensaje:"Falta un campo por completar"});
         }else{

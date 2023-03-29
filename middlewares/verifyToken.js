@@ -8,7 +8,7 @@ const verifyToken = async(req,res,next)=>{
 
      if(token){
          jwt.verify(token,SECRET_WORD,(error,data)=>{
-             if(error) return res.status(400).json({ mensaje:"Token invalido"});
+             if(error) return res.status(400).json({ mensaje:"Token invalido" , error});
              else{
                  req.user = data;
                  next();

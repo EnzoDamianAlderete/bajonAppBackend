@@ -5,7 +5,7 @@ import { createAdmin, deleteAdmin, getAdmin, getAllAdmins, loginAdmin, updateAdm
 const AdminRouter = Router();
 
 AdminRouter.get("/admins", getAllAdmins);
-AdminRouter.get("/admin", getAdmin);//agregar verifitoken
+AdminRouter.get("/admin",verifyToken, getAdmin);//agregar verifitoken
 AdminRouter.post("/admin", createAdmin);
 AdminRouter.post("/loginAdmin", loginAdmin);
 AdminRouter.put("/admin/:id", updateAdmin);

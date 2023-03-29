@@ -2,7 +2,6 @@ import mongoose, {model , Schema } from "mongoose";
 
 export const adminSchema = new Schema({
     rol:{type: String, default:"admin"},
-    name:{type: String, require: true},
     email:{type: String, require: true},
     password:{type: String, require: true},
 });
