@@ -24,15 +24,15 @@ export const createOrder = async (req, res) => {
 
   const user = await User.findById(userId);
 
-  if (!name_user || !price || !number_table) {
+  if (!name_user || !price) {
     return res.json({ mensaje: "Falta un campo por completar" });
   } else {
     const newOrder = new Order({
       name_user,
       price,
       number_table,
-      detalle_pedido,
       user: user._id,
+      detalle_pedido,
     });
 
     try {

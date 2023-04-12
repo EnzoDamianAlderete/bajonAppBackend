@@ -7,12 +7,7 @@ export const OrderSchema = new Schema({
   date: { type: Date, default: Date.now },
   completed: { type: Boolean, require: true, default: false },
   //to do . aca tiene q guardar el pedido con precio y cantidad de cada producto
-  detalle_pedido: [
-    {
-      producto: { type: Schema.Types.ObjectId, ref: "Product" },
-      cantidad: { type: Number },
-    },
-  ],
+  detalle_pedido:[]
 });
 
 const Order = mongoose.model("Order", OrderSchema);

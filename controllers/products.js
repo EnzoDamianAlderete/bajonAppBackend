@@ -24,7 +24,6 @@ export const createProduct = async (req, res) => {
     const { name_product, description_product, category, price, stock } =
       req.body;
 
-    const id = Math.random() * 10;
 
     const newProduct = new Product({
       id,
@@ -63,7 +62,7 @@ export const updateProduct = (req, res) => {
 };
 export const deleteProduct = (req, res) => {
   const productId = req.params.id;
-  const update = { deleted: true };
+  const update = { available: false };
 
   Product.findByIdAndUpdate(productId, update, (error, productUpdated) => {
     if (error) res.status(500).json({ error });
