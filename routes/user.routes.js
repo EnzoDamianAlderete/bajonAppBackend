@@ -4,7 +4,10 @@ import verifyToken from "../middlewares/verifyToken.js"
 
 const UserRouter = Router();
 
-UserRouter.get("/users", getAllUsers);
+UserRouter.get("/users", (req,res)=>{
+    res.send("funca");
+});
+// getAllUsers);
 UserRouter.get("/user",verifyToken, getUser);
 UserRouter.post("/users", createUser);
 UserRouter.post("/login", login);
