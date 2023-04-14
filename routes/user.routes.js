@@ -4,7 +4,7 @@ import verifyToken from "../middlewares/verifyToken.js"
 
 const UserRouter = Router();
 
-UserRouter.get("/users", (req,res)=>{
+UserRouter.get("/", (req,res)=>{
     res.send("funca");
 });
 // getAllUsers);
