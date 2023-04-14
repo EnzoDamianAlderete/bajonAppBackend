@@ -34,4 +34,6 @@ app.listen( PORT, ()=>{
     console.log(`Servido correctamente en el puerto ${PORT}`);
     db();
 }
-);
+).on("error",function(error){
+    console.log("algo salio mal", error);
+})
