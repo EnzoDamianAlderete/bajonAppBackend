@@ -33,6 +33,7 @@ app.use(OrderRouter);
 app.listen( PORT, ()=>{
     console.log(`Servido correctamente en el puerto ${PORT}`);
     db();
+    console.log(JSON.stringify(config));
 }
 ).on("error",function(error){
     console.log("algo salio mal", error);
